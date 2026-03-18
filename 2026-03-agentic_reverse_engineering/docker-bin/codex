@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REAL_CODEX="/usr/bin/codex"
+
+should_inject_defaults=1
+first_non_option=""
+expect_value=0
+
+for arg in "$@"; do
+  if (( expect_value )); then
+    expect_value=0
+    continue
+  fi
+
+  case "$arg" in
+    --)
+      break
+      ;;
+    -c|--config|-m|--model|-p|--profile|-s|--sandbox|-a|--ask-for-approval|-C|--cd|-o|--output-last-message|-i|--image|--color|--local-provider|--output-schema)
+      expect_value=1
+      continue
+      ;;
+    -*)
+      continue
+      ;;
+    *)
+      first_non_option="$arg"
+      break
+      ;;
+  esac
+done
+
+case "$first_non_option" in
+  login|logout|mcp|mcp-server|app-server|completion|sandbox|debug|apply|cloud|features|help)
+    should_inject_defaults=0
+    ;;
+  *)
+    should_inject_defaults=1
+    ;;
+esac
+
+declare -a extra_args=()
+has_permission_override=0
+has_model_override=0
+has_config_override=0
+expect_config_value=0
+
+for arg in "$@"; do
+  if (( expect_config_value )); then
+    has_config_override=1
+    expect_config_value=0
+    continue
+  fi
+
+  case "$arg" in
+    --dangerously-bypass-approvals-and-sandbox|--full-auto|-s|--sandbox|--sandbox=*|-a|--ask-for-approval|--ask-for-approval=*)
+      has_permission_override=1
+      ;;
+    -m|--model|--model=*)
+      has_model_override=1
+      ;;
+    -c|--config)
+      expect_config_value=1
+      has_config_override=1
+      ;;
+    -c=*|--config=*)
+      has_config_override=1
+      ;;
+  esac
+done
+
+if (( should_inject_defaults && ! has_permission_override )); then
+  extra_args+=(--dangerously-bypass-approvals-and-sandbox)
+fi
+
+if (( should_inject_defaults && ! has_model_override && ! has_config_override )); then
+  extra_args+=(--model gpt-5.4)
+fi
+
+if (( should_inject_defaults && ! has_config_override )); then
+  extra_args+=(-c 'model_reasoning_effort="xhigh"')
+fi
+
+exec "$REAL_CODEX" "${extra_args[@]}" "$@"
