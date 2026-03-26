@@ -10,7 +10,7 @@ Each webinar folder contains the session abstract together with slides, code, sa
 
 | Date | Webinar Title | Description | Recording |
 |------|---------------|-------------|-----------|
-| [2026-03-26](./2026-03-agentic_reverse_engineering/) | Agentic Reverse Engineering: How Agents Are Changing Binary Analysis | Practical introduction to how agents are reshaping reverse-engineering workflows, from MCP and tool integration to patching, cracking-style tasks, and structured analysis. | Scheduled |
+| [2026-03-26](./2026-03-agentic_reverse_engineering/) | Agentic Reverse Engineering: How Agents Are Changing Binary Analysis | Practical introduction to how agents are reshaping reverse-engineering workflows, from MCP and tool integration to patching, cracking-style tasks, and structured analysis. | [YouTube](https://www.youtube.com/watch?v=DZcDaXTvDeE) |
 
 ## About Tim
 
