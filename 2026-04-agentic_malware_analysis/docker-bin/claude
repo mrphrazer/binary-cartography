@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REAL_CLAUDE="${HOME:-/home/agent}/.local/bin/claude-real"
+
+should_inject_defaults=1
+first_non_option=""
+expect_value=0
+
+for arg in "$@"; do
+  if (( expect_value )); then
+    expect_value=0
+    continue
+  fi
+
+  case "$arg" in
+    --)
+      break
+      ;;
+    --add-dir|--agent|--agents|--allowedTools|--allowed-tools|--append-system-prompt|--betas|-d|--debug|--debug-file|--effort|--fallback-model|--file|--from-pr|--input-format|--json-schema|--max-budget-usd|--mcp-config|--model|--output-format|--permission-mode|--plugin-dir|-r|--resume|--session-id|--setting-sources|--settings|--system-prompt|--tools|-w|--worktree)
+      expect_value=1
+      continue
+      ;;
+    -*)
+      continue
+      ;;
+    *)
+      first_non_option="$arg"
+      break
+      ;;
+  esac
+done
+
+case "$first_non_option" in
+  "" )
+    should_inject_defaults=1
+    ;;
+  agents|auth|doctor|install|mcp|plugin|setup-token|update|upgrade)
+    should_inject_defaults=0
+    ;;
+  *)
+    should_inject_defaults=1
+    ;;
+esac
+
+declare -a extra_args=()
+has_permission_override=0
+has_model_override=0
+has_effort_override=0
+
+for arg in "$@"; do
+  case "$arg" in
+    --dangerously-skip-permissions|--allow-dangerously-skip-permissions|--permission-mode|--permission-mode=*)
+      has_permission_override=1
+      ;;
+    --model|--model=*)
+      has_model_override=1
+      ;;
+    --effort|--effort=*)
+      has_effort_override=1
+      ;;
+  esac
+done
+
+if (( should_inject_defaults )); then
+  if (( ! has_permission_override )); then
+    extra_args+=(--dangerously-skip-permissions)
+  fi
+  if (( ! has_model_override )); then
+    extra_args+=(--model opus)
+  fi
+  if (( ! has_effort_override )); then
+    extra_args+=(--effort high)
+  fi
+fi
+
+exec "$REAL_CLAUDE" "${extra_args[@]}" "$@"
