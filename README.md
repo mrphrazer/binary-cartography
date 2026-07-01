@@ -11,7 +11,7 @@ Each webinar folder contains the session abstract together with slides, code, sa
 | Date | Webinar Title | Description | Recording |
 |------|---------------|-------------|-----------|
 | [2026-03-26](./2026-03-agentic_reverse_engineering/) | Agentic Reverse Engineering: How Agents Are Changing Binary Analysis | Practical introduction to how agents are reshaping reverse-engineering workflows, from MCP and tool integration to patching, cracking-style tasks, and structured analysis. | [YouTube](https://www.youtube.com/watch?v=DZcDaXTvDeE) |
-| [2026-04](./2026-04-agentic_malware_analysis/) | Agentic Malware Analysis: From Task Automation to Deep Analysis | Agent-assisted malware reverse engineering across string decryption, API-resolving logic, multi-stage samples, and deeper structured analysis workflows. | TBD |
+| [2026-04](./2026-04-agentic_malware_analysis/) | Agentic Malware Analysis: From Task Automation to Deep Analysis | Agent-assisted malware reverse engineering across string decryption, API-resolving logic, multi-stage samples, and deeper structured analysis workflows. | [YouTube](https://www.youtube.com/watch?v=azej1P17w9E) |
 | [2026-07](./2026-07-code_identification/) | Pinpointing Interesting Code in Binaries: Heuristics, Statistics, and Agents | Practical walkthrough of heuristic and statistical detections for locating relevant code - state machines, cryptography, and other structural patterns - combined with agents to prune false positives and guide analysis. | TBD |
 
 ## About Tim
