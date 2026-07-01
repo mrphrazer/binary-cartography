@@ -23,7 +23,7 @@ Designed for technical security professionals, reverse engineers, and malware an
 
 ## Materials and Related Resources
 
-SLides and samples:
+Slides and samples:
 
 * Slides: [slides.pdf](./slides.pdf)
 * Samples: [samples/](./samples/) contains the live samples used during the webinar
