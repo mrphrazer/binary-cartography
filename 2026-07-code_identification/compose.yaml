@@ -1,0 +1,20 @@
+services:
+  kali:
+    image: "kali-re-tools:${IMAGE_TAG:-latest}"
+    pull_policy: never
+    working_dir: /agent
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp=unconfined
+    volumes:
+      - "${HOST_PWD:-.}:/agent"
+      - "${CLAUDE_USER_DIR:-/tmp/.claude-docker}:/home/agent/.claude"
+      - "${CODEX_USER_DIR:-/tmp/.codex-docker}:/home/agent/.codex"
+    environment:
+      - HOME=/home/agent
+      - USER=agent
+      - LOGNAME=agent
+    stdin_open: true
+    tty: true
+    command: ["/bin/bash"]
