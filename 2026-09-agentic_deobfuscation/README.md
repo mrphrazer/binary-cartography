@@ -29,6 +29,7 @@ Designed for technical security professionals, reverse engineers, and malware an
 * [mrphrazer/binary-ninja-headless-mcp](https://github.com/mrphrazer/binary-ninja-headless-mcp): agent integration for Binary Ninja
 * [Miasm](https://github.com/cea-sec/miasm): reverse-engineering framework with symbolic execution support
 * [msynth](https://github.com/mrphrazer/msynth): deobfuscation framework for simplifying mixed Boolean-arithmetic expressions
+* Talk: Deobfuscation in the Age of Agentic Reverse Engineering (REcon 2026) - [recording](https://www.youtube.com/watch?v=3-gJ6EUFoKM) and [slides](https://synthesis.to/presentations/recon26_agentic_deobfuscation.pdf)
 * Workshop recording: [Semi-automatic Code Deobfuscation (r2con2020)](https://www.youtube.com/watch?v=_TsV0RXoIQE), a two-hour introduction to symbolic execution and SMT solving, applied with Miasm to remove opaque predicates from X-Tunnel malware. Useful background for the techniques covered in this webinar.
 * Workshop code: [mrphrazer/r2con2020_deobfuscation](https://github.com/mrphrazer/r2con2020_deobfuscation) contains the example code, samples, and slides accompanying the recording.
 
