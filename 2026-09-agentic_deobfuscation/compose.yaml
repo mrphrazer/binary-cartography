@@ -1,0 +1,18 @@
+services:
+  kali:
+    image: "binary-cartography-deobfuscation:${IMAGE_TAG:-latest}"
+    pull_policy: never
+    working_dir: /agent
+    volumes:
+      - "${HOST_PWD:-.}:/agent"
+      - "${CLAUDE_USER_DIR:-/tmp/.claude-docker}:/home/agent/.claude"
+      - "${CODEX_USER_DIR:-/tmp/.codex-docker}:/home/agent/.codex"
+      - "${PI_USER_DIR:-${HOME}/.pi-docker}:/home/agent/.pi"
+      - "${BINARY_NINJA_USER_DIR:-${HOME}/.binaryninja-docker}:/home/agent/.binaryninja"
+    environment:
+      - HOME=/home/agent
+      - USER=agent
+      - LOGNAME=agent
+    stdin_open: true
+    tty: true
+    command: ["/bin/bash"]
